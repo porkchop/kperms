@@ -9,9 +9,9 @@ func main() {
 	work()
 }
 
-func work(){
+func work() {
 	kp, err := kperm.New(5, 3)
-	if err!=nil{
+	if err != nil {
 		fmt.Println(err)
 		return
 	}
