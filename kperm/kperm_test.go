@@ -1,16 +1,12 @@
-package main
+package kperm
 
 import (
-	"./src"
 	"fmt"
+	"testing"
 )
 
-func main() {
-	work()
-}
-
-func work() {
-	kp, err := kperm.New(5, 3)
+func TestThreePermFive(t *testing.T) {
+	kp, err := New(5, 3)
 	if err != nil {
 		fmt.Println(err)
 		return
