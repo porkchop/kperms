@@ -6,7 +6,7 @@ import (
 
 type KPerm struct {
 	current []int
-	index   int
+	index   uint64
 	k       int
 	n       int
 }
@@ -34,23 +34,15 @@ func (kp KPerm) Perm() []int {
 	return kp.current[0:kp.k]
 }
 
-func factorial(n int) int {
-	i := 1
-	for ; n > 0; n-- {
-		i = i * n
-	}
-	return i
-}
-
-func (kp KPerm) Index() int {
+func (kp KPerm) Index() uint64 {
 	return kp.index
 }
 
-func (kp KPerm) NumPerms() int {
-	return factorial(kp.n) / factorial(kp.n-kp.k)
+func (kp KPerm) NumPerms() uint64 {
+	return Factorial(kp.n) / Factorial(kp.n-kp.k)
 }
 
-func (kp KPerm) MaxIndex() int {
+func (kp KPerm) MaxIndex() uint64 {
 	return kp.NumPerms() - 1
 }
 
