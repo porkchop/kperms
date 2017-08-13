@@ -1,11 +1,10 @@
 package kperm
 
 import (
-	"testing"
-	"reflect"
 	"github.com/tj/assert"
+	"reflect"
+	"testing"
 )
-
 
 func TestPerms(t *testing.T) {
 	assertDigitsCorrect := func(perm []int, n int) {
@@ -47,13 +46,13 @@ func TestPerms(t *testing.T) {
 		}
 
 		// correct number of permutations
-		assert.Equal(t, uint64(len(perms)), Factorial(n) / Factorial(n - k));
+		assert.Equal(t, uint64(len(perms)), Factorial(n)/Factorial(n-k))
 
 		// none of them repeat
 		assertPermsNeverRepeat(perms)
 	}
 
-	assertInvalidPerm := func (n int, k int) {
+	assertInvalidPerm := func(n int, k int) {
 		_, err := New(n, k)
 		assert.Error(t, err, "init")
 	}
