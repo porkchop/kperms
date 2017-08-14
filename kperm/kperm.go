@@ -50,7 +50,7 @@ func (kp KPerm) Done() bool {
 	return kp.MaxIndex() == kp.index
 }
 
-func (kp KPerm) Reset() {
+func (kp *KPerm) Reset() {
 	for i := 0; i < kp.n; i++ {
 		kp.current[i] = i
 	}

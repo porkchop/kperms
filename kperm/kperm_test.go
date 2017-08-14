@@ -31,10 +31,7 @@ func TestPerms(t *testing.T) {
 		}
 	}
 
-	assertValidPerm := func(n int, k int) {
-		kp, err := New(n, k)
-		assert.NoError(t, err, "init")
-
+	_assertValidPermHelper := func(kp *KPerm, n int, k int) {
 		currentPerm := kp.Perm()
 		assertDigitsCorrect(currentPerm, n)
 		perms := [][]int{currentPerm}
@@ -54,6 +51,13 @@ func TestPerms(t *testing.T) {
 		assertPermsNeverRepeat(perms)
 	}
 
+	assertValidPerm := func(n int, k int) {
+		kp, err := New(n, k)
+		assert.NoError(t, err, "init")
+
+		_assertValidPermHelper(kp, n, k)
+	}
+
 	assertInvalidPerm := func(n int, k int) {
 		_, err := New(n, k)
 		assert.Error(t, err, "init")
@@ -70,5 +74,21 @@ func TestPerms(t *testing.T) {
 		assertInvalidPerm(0, -1)
 		assertInvalidPerm(5, 0)
 		assertInvalidPerm(5, 6)
+	})
+
+	t.Run("reset", func(t *testing.T) {
+		kp, err := New(3, 2)
+		assert.NoError(t, err, "init")
+
+		firstPerm := kp.Perm()
+		assert.True(t, !kp.Done())
+		for !kp.Done() {
+			kp.Next()
+		}
+
+		kp.Reset()
+		assert.True(t, !kp.Done())
+		assert.True(t, reflect.DeepEqual(firstPerm, kp.Perm()))
+		_assertValidPermHelper(kp, 3, 2)
 	})
 }
