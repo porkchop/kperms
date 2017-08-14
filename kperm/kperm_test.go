@@ -38,11 +38,13 @@ func TestPerms(t *testing.T) {
 		currentPerm := kp.Perm()
 		assertDigitsCorrect(currentPerm, n)
 		perms := [][]int{currentPerm}
+		assert.Equal(t, uint64(len(perms)-1), kp.Index())
 		for !kp.Done() {
 			kp.Next()
 			currentPerm = kp.Perm()
 			assertDigitsCorrect(currentPerm, n)
 			perms = append(perms, currentPerm)
+			assert.Equal(t, uint64(len(perms)-1), kp.Index())
 		}
 
 		// correct number of permutations
