@@ -30,6 +30,14 @@ func New(n int, k int) (*KPerm, error) {
 	return kp, nil
 }
 
+func (kp KPerm) K() int {
+	return kp.k
+}
+
+func (kp KPerm) N() int {
+	return kp.n
+}
+
 func (kp KPerm) Perm() []int {
 	return kp.current[0:kp.k]
 }
