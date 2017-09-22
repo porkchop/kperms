@@ -12,6 +12,7 @@ func Factorial(n int) (res uint64) {
 
 	if n > 0 {
 		res = uint64(n) * Factorial(n-1)
+		facts[n] = res
 		return res
 	}
 
